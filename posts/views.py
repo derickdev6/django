@@ -1,46 +1,43 @@
 # Posts views
 
 # Django
-from django.http import HttpResponse
+from django.shortcuts import render
 
 # Utilities
 from datetime import datetime
 
+
 posts = [
     {
-        'name': 'Everest',
-        'user': 'Derick',
+        'title': 'Mont Blanc',
+        'user': {
+            'name': 'Yésica Cortés',
+            'picture': 'https://picsum.photos/60/60/?image=1027'
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'pic': 'https://images.unsplash.com/photo-1556135063-eba17c48d523?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8dG93SlpGc2twR2d8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+        'photo': 'https://picsum.photos/800/600?image=1036',
     },
     {
-        'name': 'Alhil',
-        'user': 'Edna',
+        'title': 'Via Láctea',
+        'user': {
+            'name': 'Christian Van der Henst',
+            'picture': 'https://picsum.photos/60/60/?image=1005'
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'pic': 'https://images.unsplash.com/photo-1628038340278-9818521002ac?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDd8dG93SlpGc2twR2d8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+        'photo': 'https://picsum.photos/800/800/?image=903',
     },
     {
-        'name': 'Bakka',
-        'user': 'Dario',
+        'title': 'Nuevo auditorio',
+        'user': {
+            'name': 'Uriel (thespianartist)',
+            'picture': 'https://picsum.photos/60/60/?image=883'
+        },
         'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'pic': 'https://images.unsplash.com/photo-1628038341191-8e7448fc8209?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDh8dG93SlpGc2twR2d8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
-    },
-    {
-        'name': 'Yamal',
-        'user': 'Joseph',
-        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
-        'pic': 'https://images.unsplash.com/photo-1627660692856-bc032e058cc2?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDIwfHRvd0paRnNrcEdnfHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
+        'photo': 'https://picsum.photos/500/700/?image=1076',
     }
 ]
 
 
 def list_posts(request):
     # Lists existing posts
-    content = []
-    for post in posts:
-        content.append("""
-            <p><strong>{name}</strong></p>
-            <p><small>{user} - <i>{timestamp}</i></small></p>
-            <img src="{pic}" height="200">
-        """.format(**post))
-    return HttpResponse(content)
+    return render(request, 'feed.html', {'posts': posts})
