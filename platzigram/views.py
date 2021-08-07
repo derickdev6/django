@@ -28,5 +28,9 @@ def sort_nums(request):
         content_type='application/json')
 
 
-def hi(request):
-    pass
+def hi(request, name, age):
+    if age < 14:
+        message = f"Sorry, {name} you are not allowed to enter on Platzigram"
+    else:
+        message = f"Welcome to Platzigram, {name}!"
+    return HttpResponse(message)
